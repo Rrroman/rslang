@@ -68,7 +68,12 @@ const NextBtn: React.FC = () => {
     dispatch(isAnswerSelected(true))
   }
 
+
+
   const showResults = () => {
+
+    dispatch(isShowResults(true));
+    dispatch(audioGameStart(false));
     const param = {
       userId: user.userId,
       token: user.token,
@@ -80,16 +85,16 @@ const NextBtn: React.FC = () => {
       combo: gameResult.maxCorrectComboCount,
       wordsId: gameResult.wordsIdArr,
     };
-    dispatch(checkAndSaveMaxCombo());
+
     if (
       isLevelVisible ||
       currentWordList[0].userWord?.difficulty === 'deleted'
     ) {
-      dispatch(setStatistics(param, body));
+      return;
     }
+    dispatch(setStatistics(param, body));
+    dispatch(checkAndSaveMaxCombo());
 
-    dispatch(isShowResults(true));
-    dispatch(audioGameStart(false));
   }
 
 

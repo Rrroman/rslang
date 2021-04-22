@@ -174,9 +174,6 @@ const RenderWordCard: React.FC = () => {
       // console.log(refStop.current.getBoundingClientRect().y)
     }
 
-    console.log('rightWord', rightWord.id);
-
-    dispatch(userAnswer({}));
     dispatch(isWordMove(true));
     dispatch(isWordFalled(false));
     dispatch(isAnswerSelected(false));
@@ -187,7 +184,6 @@ const RenderWordCard: React.FC = () => {
       (item: Object, index: number) => index < 4
     );
     dispatch(currentPlayWords(currentPlayList));
-    // dispatch(stepCounter(roundCounter + 1));
   };
 
   const checkUserAnswer = (word: CurrentWordListType) => {
@@ -200,7 +196,12 @@ const RenderWordCard: React.FC = () => {
     dispatch(stepCounter(roundCounter + 1));
   }
 
+
+
   const showResults = () => {
+    dispatch(isShowResults(true));
+    dispatch(savannaGameStart(false));
+    dispatch(isWordMove(false));
     const param = {
       userId: user.userId,
       token: user.token,
@@ -217,12 +218,11 @@ const RenderWordCard: React.FC = () => {
       isLevelVisible ||
       currentWordList[0].userWord?.difficulty === 'deleted'
     ) {
-      dispatch(setStatistics(param, body));
+      return;
     }
-    dispatch(isShowResults(true));
-    dispatch(savannaGameStart(false))
-    // dispatch(stepCounter(roundCounter + 1));
-    dispatch(isWordMove(false));
+    dispatch(setStatistics(param, body));
+    dispatch(checkAndSaveMaxCombo());
+
   }
 
 
