@@ -36,9 +36,6 @@ import { setStatistics } from '../../actions/statistic-action';
 
 const RenderWordCard: React.FC = () => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchWordsList({ page: 0, group: 0 }));
-  // }, []);
 
   const isPlaying = useSelector(
     (state: RootStateType) => state.savannaGameState.savannaGameStart
@@ -67,7 +64,9 @@ const RenderWordCard: React.FC = () => {
   const startPosition = useSelector(
     (state: RootStateType) => state.savannaGameState.startWordPosition
   );
-
+  const listWrongWords = useSelector(
+    (state: RootStateType) => state.savannaGameState.listWrongWords
+  );
   const listLearnWords = useSelector(
     (state: RootStateType) => state.savannaGameState.listLearnWords
   );
@@ -130,6 +129,9 @@ const RenderWordCard: React.FC = () => {
     do {
       random = currentWords[getRandomInt(0, currentWords.length - 1)];
     } while (listLearnWords.includes(random.id));
+    // console.log(listLearnWords);
+    // console.log(random);
+    // console.log('wrong', listWrongWords)
     dispatch(wordRight(random));
     dispatch(setLearnWords(random.id));
   }, [currentWords]);
@@ -140,12 +142,14 @@ const RenderWordCard: React.FC = () => {
     }
     if (userAnswer.word === rightWord.word) {
       dispatch(listRightWords(rightWord));
+      console.log('right add', listRightWords)
       dispatch(setWorldResult(true, rightWord.id));
       if (userState.isLogin) {
         dispatch(userWordToLearnResult(params, { isCorrect: true }));
       }
     } else {
       dispatch(setWrongWords(rightWord));
+      console.log('wrong', listWrongWords);
       dispatch(setWorldResult(false, rightWord.id));
       if (userState.isLogin) {
         dispatch(userWordToLearnResult(params, { isCorrect: false }));
@@ -170,6 +174,9 @@ const RenderWordCard: React.FC = () => {
       // console.log(refStop.current.getBoundingClientRect().y)
     }
 
+    console.log('rightWord', rightWord.id);
+
+    dispatch(userAnswer({}));
     dispatch(isWordMove(true));
     dispatch(isWordFalled(false));
     dispatch(isAnswerSelected(false));
@@ -214,14 +221,14 @@ const RenderWordCard: React.FC = () => {
     }
     dispatch(isShowResults(true));
     dispatch(savannaGameStart(false))
-    dispatch(stepCounter(roundCounter + 1));
+    // dispatch(stepCounter(roundCounter + 1));
     dispatch(isWordMove(false));
   }
 
 
   return (
     <div className={styles.falling__word__container}>
-      {roundCounter === 10 ? (
+      {roundCounter === 11 ? (
         <button
           type="button"
           onClick={() => showResults()}

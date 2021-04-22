@@ -65,6 +65,8 @@ const SavannaGame: React.FC = () => {
     []
   );
 
+
+
   useEffect(() => {
     if (!isAnswer) {
       return;

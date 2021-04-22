@@ -78,6 +78,7 @@ const StartScreen: React.FC = () => {
   const startGame = () => {
     dispatch(isWordMove(true));
     dispatch(isAnswerSelected(false));
+    // dispatch(rightWord())
     dispatch(startWordPosition(0));
     dispatch(stepCounter(1));
     dispatch(clearWords());
