@@ -32,7 +32,6 @@ export const GameChart: React.FC<Props> = ({
       (app.know * 100) / (app.know + app.dont_know)
     );
   }
-  console.log('local data', localData);
   const data = {
     labels: ['Неправильно %', 'Правильно %'],
     datasets: [

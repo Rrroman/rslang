@@ -106,6 +106,8 @@ const savannaGameReducer = (
         listRightWords: [],
         listWrongWords: [],
         listLearnWords: [],
+        wordRight:{},
+        wordUserAnswer: {}
       };
 
     case ADD_LEARN_WORDS:

@@ -78,6 +78,7 @@ const StartScreen: React.FC = () => {
   const startGame = () => {
     dispatch(isWordMove(true));
     dispatch(isAnswerSelected(false));
+    // dispatch(rightWord())
     dispatch(startWordPosition(0));
     dispatch(stepCounter(1));
     dispatch(clearWords());
@@ -85,7 +86,6 @@ const StartScreen: React.FC = () => {
     if (wordList === undefined) {
       return;
     }
-    console.log('play button click');
     const currentPlayList = shuffle(wordList).filter(
       (item: Object, index: number) => index < 4
     );

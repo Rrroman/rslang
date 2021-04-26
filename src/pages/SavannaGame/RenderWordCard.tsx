@@ -36,9 +36,6 @@ import { setStatistics } from '../../actions/statistic-action';
 
 const RenderWordCard: React.FC = () => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchWordsList({ page: 0, group: 0 }));
-  // }, []);
 
   const isPlaying = useSelector(
     (state: RootStateType) => state.savannaGameState.savannaGameStart
@@ -67,7 +64,9 @@ const RenderWordCard: React.FC = () => {
   const startPosition = useSelector(
     (state: RootStateType) => state.savannaGameState.startWordPosition
   );
-
+  const listWrongWords = useSelector(
+    (state: RootStateType) => state.savannaGameState.listWrongWords
+  );
   const listLearnWords = useSelector(
     (state: RootStateType) => state.savannaGameState.listLearnWords
   );
@@ -112,7 +111,6 @@ const RenderWordCard: React.FC = () => {
     const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
 
       if (refStop.current) {
-        // console.log(refStop.current.getBoundingClientRect().y)
         dispatch(stopPosition(refStop.current.getBoundingClientRect().y));
       }
     }, 1000);
@@ -146,6 +144,7 @@ const RenderWordCard: React.FC = () => {
       }
     } else {
       dispatch(setWrongWords(rightWord));
+
       dispatch(setWorldResult(false, rightWord.id));
       if (userState.isLogin) {
         dispatch(userWordToLearnResult(params, { isCorrect: false }));
@@ -166,10 +165,6 @@ const RenderWordCard: React.FC = () => {
 
 
   const playGame = () => {
-    if (refStop.current) {
-      // console.log(refStop.current.getBoundingClientRect().y)
-    }
-
     dispatch(isWordMove(true));
     dispatch(isWordFalled(false));
     dispatch(isAnswerSelected(false));
@@ -180,7 +175,6 @@ const RenderWordCard: React.FC = () => {
       (item: Object, index: number) => index < 4
     );
     dispatch(currentPlayWords(currentPlayList));
-    // dispatch(stepCounter(roundCounter + 1));
   };
 
   const checkUserAnswer = (word: CurrentWordListType) => {
@@ -193,7 +187,12 @@ const RenderWordCard: React.FC = () => {
     dispatch(stepCounter(roundCounter + 1));
   }
 
+
+
   const showResults = () => {
+    dispatch(isShowResults(true));
+    dispatch(savannaGameStart(false));
+    dispatch(isWordMove(false));
     const param = {
       userId: user.userId,
       token: user.token,
@@ -210,18 +209,17 @@ const RenderWordCard: React.FC = () => {
       isLevelVisible ||
       currentWordList[0].userWord?.difficulty === 'deleted'
     ) {
-      dispatch(setStatistics(param, body));
+      return;
     }
-    dispatch(isShowResults(true));
-    dispatch(savannaGameStart(false))
-    dispatch(stepCounter(roundCounter + 1));
-    dispatch(isWordMove(false));
+    dispatch(setStatistics(param, body));
+    dispatch(checkAndSaveMaxCombo());
+
   }
 
 
   return (
     <div className={styles.falling__word__container}>
-      {roundCounter === 10 ? (
+      {roundCounter === 11 ? (
         <button
           type="button"
           onClick={() => showResults()}

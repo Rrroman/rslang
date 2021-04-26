@@ -66,7 +66,7 @@ const Results: React.FC = () => {
       <h1 className={styles.title}>Результаты</h1>
       <div className={styles['result-wrapper']}>
         <h2 className={`${styles['sub-title']} ${styles['sub-title_success']}`}>
-          Правильно: {rightWords.length}
+          Правильно: {Object.values(rightWord).length}
         </h2>
         <ul className={styles.list}>
           {rightWords.map((wordObject) => (
