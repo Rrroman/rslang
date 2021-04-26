@@ -81,9 +81,6 @@ const FallingWord: React.FC = () => {
       clearInterval(timer as ReturnType<typeof setInterval>);
     }
     if (position > 323) {
-      if (refBtn.current) {
-        // console.log(refBtn.current.getBoundingClientRect().y)
-      }
 
       showAnswer();
 

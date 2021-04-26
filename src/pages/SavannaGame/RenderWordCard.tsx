@@ -111,7 +111,6 @@ const RenderWordCard: React.FC = () => {
     const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
 
       if (refStop.current) {
-        // console.log(refStop.current.getBoundingClientRect().y)
         dispatch(stopPosition(refStop.current.getBoundingClientRect().y));
       }
     }, 1000);
@@ -129,9 +128,6 @@ const RenderWordCard: React.FC = () => {
     do {
       random = currentWords[getRandomInt(0, currentWords.length - 1)];
     } while (listLearnWords.includes(random.id));
-    // console.log(listLearnWords);
-    // console.log(random);
-    // console.log('wrong', listWrongWords)
     dispatch(wordRight(random));
     dispatch(setLearnWords(random.id));
   }, [currentWords]);
@@ -142,14 +138,13 @@ const RenderWordCard: React.FC = () => {
     }
     if (userAnswer.word === rightWord.word) {
       dispatch(listRightWords(rightWord));
-      console.log('right add', listRightWords)
       dispatch(setWorldResult(true, rightWord.id));
       if (userState.isLogin) {
         dispatch(userWordToLearnResult(params, { isCorrect: true }));
       }
     } else {
       dispatch(setWrongWords(rightWord));
-      console.log('wrong', listWrongWords);
+
       dispatch(setWorldResult(false, rightWord.id));
       if (userState.isLogin) {
         dispatch(userWordToLearnResult(params, { isCorrect: false }));
@@ -170,10 +165,6 @@ const RenderWordCard: React.FC = () => {
 
 
   const playGame = () => {
-    if (refStop.current) {
-      // console.log(refStop.current.getBoundingClientRect().y)
-    }
-
     dispatch(isWordMove(true));
     dispatch(isWordFalled(false));
     dispatch(isAnswerSelected(false));

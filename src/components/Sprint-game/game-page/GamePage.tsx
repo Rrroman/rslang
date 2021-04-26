@@ -76,8 +76,8 @@ const GamePage: React.FC = () => {
         getRandomNumber(2) === 0
           ? setWordToGuess(shuffledArray[wordCounter].wordTranslate)
           : setWordToGuess(
-              shuffledArray[randomArray[wordCounter]].wordTranslate
-            );
+            shuffledArray[randomArray[wordCounter]].wordTranslate
+          );
       }
     }
   }, [wordCounter]);
@@ -164,7 +164,6 @@ const GamePage: React.FC = () => {
   };
 
   const endGameHandler = () => {
-    console.log('i worked');
     dispatch(sprintGameStatusChange('start'));
     dispatch(sprintGameWordCounter(0));
     dispatch(clearWords());
@@ -173,7 +172,6 @@ const GamePage: React.FC = () => {
     dispatch(sprintGameCheckPoints(0));
     dispatch(sprintGameCurrentPoints(50));
     dispatch(clearAllCount());
-    console.log(gameStatus);
   };
 
   return (
@@ -267,7 +265,7 @@ const GamePage: React.FC = () => {
             />
           </button>
         )}
-       
+
         <button
           type="button"
           className={styles.close__button}

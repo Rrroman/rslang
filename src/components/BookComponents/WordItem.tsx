@@ -42,7 +42,7 @@ const useStyles = makeStyles({
     width: '14rem',
     flexShrink: 0,
     justifyContent: 'center',
-    
+
   },
   statusIconContainer: {
     width: '1.5rem',
@@ -91,7 +91,7 @@ const useStyles = makeStyles({
   wordNameWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    gap: '1rem' ,
+    gap: '1rem',
     textAlign: 'left'
   },
   textContainer: {
@@ -157,7 +157,7 @@ const useStyles = makeStyles({
       flexDirection: 'column-reverse',
       justifyContent: 'flex-end',
       alignItems: 'space-between',
-      width: '7rem',  
+      width: '7rem',
     },
     playButton: {
       marginLeft: 0
@@ -218,8 +218,8 @@ const WordItem: React.FC<Props> = ({ word, group, forseFetch, settings }) => {
         correctPercent,
       })
     }
-    // console.log(wordStats)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleClickAudio = () => {
@@ -320,7 +320,7 @@ const WordItem: React.FC<Props> = ({ word, group, forseFetch, settings }) => {
           )}
         </div>
         <div className={classes.imageContainer} />
-        <Tooltip classes={ { tooltip: classes.tooltip } } TransitionComponent={Fade} title='Воспроизвести'>
+        <Tooltip classes={{ tooltip: classes.tooltip }} TransitionComponent={Fade} title='Воспроизвести'>
           <div className={classes.playButton}
             aria-hidden={true}
             onClick={handleClickAudio}
@@ -373,33 +373,33 @@ const WordItem: React.FC<Props> = ({ word, group, forseFetch, settings }) => {
       <div className={classes.infoContainer}>
         {settings.showButtons && (
           <div className={classes.buttonsBox}>
-             <Tooltip classes={ { tooltip: classes.tooltip } } TransitionComponent={Fade} title='Добавить в сложные'>
-            <div
-              className={clsx(classes.button, classes.buttonHard)}
-              onClick={() => addItemToHard()}
-              aria-hidden={true}
-            />
+            <Tooltip classes={{ tooltip: classes.tooltip }} TransitionComponent={Fade} title='Добавить в сложные'>
+              <div
+                className={clsx(classes.button, classes.buttonHard)}
+                onClick={() => addItemToHard()}
+                aria-hidden={true}
+              />
             </Tooltip>
             {word.userWord.difficulty !== 'deleted' && (
-            <Tooltip classes={ { tooltip: classes.tooltip } } TransitionComponent={Fade} title='Добавить в удаленные'><div
-              className={clsx(classes.button, classes.buttonDelete)}
-              onClick={() => deleteItem()}
-              aria-hidden={true}
-            /></Tooltip>)}
+              <Tooltip classes={{ tooltip: classes.tooltip }} TransitionComponent={Fade} title='Добавить в удаленные'><div
+                className={clsx(classes.button, classes.buttonDelete)}
+                onClick={() => deleteItem()}
+                aria-hidden={true}
+              /></Tooltip>)}
             <Tooltip classes={{ tooltip: classes.tooltip }} TransitionComponent={Fade} title='Вернуть в простые'>
-            <div
-              className={clsx(classes.button, classes.buttonReturn)}
-              onClick={() => returnItem()}
-              aria-hidden={true}
-            />
+              <div
+                className={clsx(classes.button, classes.buttonReturn)}
+                onClick={() => returnItem()}
+                aria-hidden={true}
+              />
             </Tooltip>
             {/* className={clsx({[classes.difficultyButton]: true, [classes.activeButton]: difficulty === 'all'})} */}
           </div>
         )}
         <div className={classes.statsBox}>
-            {wordStats.summ > 0 &&`${wordStats.correctPercent}`}
-        </div>       
-        
+          {wordStats.summ > 0 && `${wordStats.correctPercent}`}
+        </div>
+
       </div>
 
       {/* {item?.word}

@@ -35,7 +35,6 @@ const WordInfo: React.FC = () => {
   }, [play]);
 
   const playSoundWord = () => {
-    console.log('click answer', isPlaying, rightWord);
     if (isPlaying && Object.keys(rightWord).length > 0) {
       play();
     }

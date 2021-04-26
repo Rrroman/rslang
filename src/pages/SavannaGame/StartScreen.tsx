@@ -86,7 +86,6 @@ const StartScreen: React.FC = () => {
     if (wordList === undefined) {
       return;
     }
-    console.log('play button click');
     const currentPlayList = shuffle(wordList).filter(
       (item: Object, index: number) => index < 4
     );

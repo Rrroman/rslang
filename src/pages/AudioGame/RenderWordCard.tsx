@@ -65,7 +65,6 @@ const RenderWordCard: React.FC = () => {
       return
     }
     if (!isDontknow && userAnswer.word === rightWord.word) {
-      console.log('right', rightWord)
       dispatch(listRightWords(rightWord));
       dispatch(setWorldResult(true, rightWord.id));
       if (userState.isLogin) {
@@ -73,7 +72,6 @@ const RenderWordCard: React.FC = () => {
       }
     }
     else {
-      console.log('right', rightWord)
       dispatch(setWrongWords(rightWord));
       dispatch(setWorldResult(false, rightWord.id));
       if (userState.isLogin) {

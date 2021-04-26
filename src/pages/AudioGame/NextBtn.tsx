@@ -71,7 +71,6 @@ const NextBtn: React.FC = () => {
 
 
   const showResults = () => {
-
     dispatch(isShowResults(true));
     dispatch(audioGameStart(false));
     const param = {
